@@ -4,18 +4,78 @@
 #include "framework.h"
 #include "Lab10GraphsDLL.h"
 
-
-// This is an example of an exported variable
-LAB10GRAPHSDLL_API int nLab10GraphsDLL=0;
-
-// This is an example of an exported function.
-LAB10GRAPHSDLL_API int fnLab10GraphsDLL(void)
-{
-    return 0;
+Node::Node(int Val, Node* Next) {
+	val = Val;
+	next = Next;
 }
 
-// This is the constructor of a class that has been exported.
-CLab10GraphsDLL::CLab10GraphsDLL()
-{
-    return;
+Graph::Graph() {
+
+}
+
+Graph::~Graph() {
+
+}
+
+int Graph::FindPoint(int val) {
+	for (int i = 0; i < graphPoints.size(); i++) {
+		if (graphPoints[i]->val == val) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+//3 cases, either we don't have anything, we have the value in our list, if so we need to add a new stop
+//Or we don't have the value in our list, in which case we need to add it
+bool Graph::addEdge(int b, int c) {
+	if (graphPoints.size() == 0) {
+		graphPoints.push_back(new Node(b, new Node(c, NULL)));
+		graphPoints.push_back(new Node(c, new Node(b, NULL)));
+	}
+	else {
+		int spot = FindPoint(b);
+		if (spot != -1) {
+			Node* Temp = graphPoints[spot];
+			while (Temp->next != NULL) {
+				Temp = Temp->next;
+			}
+			Temp->next = new Node(c, NULL);
+		}
+		else {
+			graphPoints.push_back(new Node(b, new Node(c, NULL)));
+		}
+		spot = FindPoint(c);
+		if (spot != -1) {
+			Node* Temp2 = graphPoints[spot];
+			while (Temp2->next != NULL) {
+				Temp2 = Temp2->next;
+			}
+			Temp2->next = new Node(b, NULL);
+		}
+		else {
+			graphPoints.push_back(new Node(c, new Node(b, NULL)));
+		}
+	}
+	return false;
+}
+
+bool Graph::removeEdge(int b, int c) {
+	return false;
+}
+
+bool Graph::hasEdge(int b, int c) {
+	int spot = FindPoint(b);
+	if (spot != -1) {
+
+	}
+	return false;
+}
+
+bool Graph::inEdges(int c) {
+	return false;
+}
+
+bool Graph::outEdges(int b) {
+	return false;
 }

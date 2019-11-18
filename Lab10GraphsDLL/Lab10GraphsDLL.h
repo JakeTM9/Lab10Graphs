@@ -1,22 +1,31 @@
-// The following ifdef block is the standard way of creating macros which make exporting
-// from a DLL simpler. All files within this DLL are compiled with the LAB10GRAPHSDLL_EXPORTS
-// symbol defined on the command line. This symbol should not be defined on any project
-// that uses this DLL. This way any other project whose source files include this file see
-// LAB10GRAPHSDLL_API functions as being imported from a DLL, whereas this DLL sees symbols
-// defined with this macro as being exported.
 #ifdef LAB10GRAPHSDLL_EXPORTS
 #define LAB10GRAPHSDLL_API __declspec(dllexport)
 #else
 #define LAB10GRAPHSDLL_API __declspec(dllimport)
 #endif
 
-// This class is exported from the dll
-class LAB10GRAPHSDLL_API CLab10GraphsDLL {
+#include <vector>
+#include <string>
+using namespace std;
+
+class LAB10GRAPHSDLL_API Node {
 public:
-	CLab10GraphsDLL(void);
-	// TODO: add your methods here.
+	Node(int Val, Node* Next);
+	int val;
+	Node* next;
 };
 
-extern LAB10GRAPHSDLL_API int nLab10GraphsDLL;
-
-LAB10GRAPHSDLL_API int fnLab10GraphsDLL(void);
+class LAB10GRAPHSDLL_API Graph {
+private:
+	vector<Node*> graphPoints;
+	int FindPoint(int val);
+public:
+	Graph();
+	bool addEdge(int b, int c);
+	bool removeEdge(int b, int c);
+	bool hasEdge(int b, int c);
+	bool outEdges(int b);
+	bool inEdges(int c);
+	string printMatrix();
+	~Graph();
+};

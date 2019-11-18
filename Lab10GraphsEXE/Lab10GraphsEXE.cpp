@@ -2,10 +2,15 @@
 //
 
 #include <iostream>
+#include "..///Lab10GraphsDLL/Lab10GraphsDLL.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Graph myGraph;
+	myGraph.addEdge(1, 2);
+	myGraph.addEdge(1, 3);
+	myGraph.addEdge(1, 5);
+	cout << "hi";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
