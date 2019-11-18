@@ -1,0 +1,2 @@
+#define LAB10GRAPHSDLL_API __declspec(dllexport)
+#define LAB10GRAPHSDLL_API __declspec(dllimport)
