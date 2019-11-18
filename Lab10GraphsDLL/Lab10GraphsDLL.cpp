@@ -67,15 +67,46 @@ bool Graph::removeEdge(int b, int c) {
 bool Graph::hasEdge(int b, int c) {
 	int spot = FindPoint(b);
 	if (spot != -1) {
-
+		Node* Temp = graphPoints[spot];
+		while (Temp->next != NULL) {
+			if (Temp->val == c) {
+				return true;
+			}
+			Temp = Temp->next;
+		}
 	}
 	return false;
 }
 
-bool Graph::inEdges(int c) {
-	return false;
+//Fast boi
+vector<int> Graph::inEdges(int c) {
+	vector<int> vals;
+	int spot = FindPoint(c);
+	Node* Temp = graphPoints[spot];
+	while (Temp->next != NULL) {
+		vals.push_back(Temp->next->val);
+		Temp = Temp->next;
+	}
+	return vals;
 }
 
-bool Graph::outEdges(int b) {
-	return false;
+//May also be able to do inedges method here since all points are connected and none are just one way
+vector<int> Graph::outEdges(int b) {
+	vector<int> vals;
+	vector<int> connectors;
+	for (int i = 0; i < graphPoints.size(); i++) {
+		connectors = inEdges(graphPoints[i]->val);
+		for (int j = 0; j < connectors.size();j++) {
+			if (connectors[j] == b) {
+				vals.push_back(graphPoints[i]->val);
+			}
+		}
+	}
+
+	return vals;
+}
+
+string Graph::printMatrix() {
+	string s = "Hoi";
+	return s;
 }

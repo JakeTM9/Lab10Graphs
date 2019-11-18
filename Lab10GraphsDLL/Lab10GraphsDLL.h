@@ -24,8 +24,8 @@ public:
 	bool addEdge(int b, int c);
 	bool removeEdge(int b, int c);
 	bool hasEdge(int b, int c);
-	bool outEdges(int b);
-	bool inEdges(int c);
+	vector<int> outEdges(int b);
+	vector<int> inEdges(int c);
 	string printMatrix();
 	~Graph();
 };
